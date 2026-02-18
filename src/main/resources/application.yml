@@ -3,7 +3,9 @@ spring:
     name: passwordless-auth-backend
   
   datasource:
-    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/passwordless_auth}
+    url: jdbc:postgresql://${PGHOST:localhost}:${PGPORT:5432}/${PGDATABASE:passwordless_auth}
+    username: ${PGUSER:auth_user}
+    password: ${PGPASSWORD:auth_password}
     driver-class-name: org.postgresql.Driver
   
   jpa:
