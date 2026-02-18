@@ -3,9 +3,7 @@ spring:
     name: passwordless-auth-backend
   
   datasource:
-    url: ${JDBC_DATABASE_URL:${DATABASE_URL:jdbc:postgresql://localhost:5432/passwordless_auth}}
-    username: ${DATABASE_USERNAME:auth_user}
-    password: ${DATABASE_PASSWORD:auth_password}
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/passwordless_auth}
     driver-class-name: org.postgresql.Driver
   
   jpa:
@@ -14,6 +12,7 @@ spring:
     show-sql: false
     properties:
       hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
   
   security:
@@ -27,9 +26,9 @@ server:
 # WebAuthn Configuration
 webauthn:
   rp:
-    id: ${WEBAUTHN_RP_ID:cdac-login.vercel.app}
+    id: ${WEBAUTHN_RP_ID:ritualroute.com}
     name: ${WEBAUTHN_RP_NAME:CDAC Passwordless Auth}
-  origin: ${WEBAUTHN_ORIGIN:https://cdac-login.vercel.app}
+  origin: ${WEBAUTHN_ORIGIN:https://www.ritualroute.com}
 
 # JWT Configuration
 jwt:
@@ -38,7 +37,7 @@ jwt:
 
 # CORS Configuration
 cors:
-  allowed-origins: ${CORS_ALLOWED_ORIGINS:https://cdac-login.vercel.app}
+  allowed-origins: ${CORS_ALLOWED_ORIGINS:https://www.ritualroute.com}
 
 logging:
   level:
