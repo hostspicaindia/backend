@@ -52,3 +52,12 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+// Ensure only bootJar is created, not plain jar
+jar {
+    enabled = false
+}
+
+bootJar {
+    enabled = true
+}
