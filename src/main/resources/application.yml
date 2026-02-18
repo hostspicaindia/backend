@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: passwordless-auth-backend
+  
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/passwordless_auth}
+    username: ${DATABASE_USERNAME:auth_user}
+    password: ${DATABASE_PASSWORD:auth_password}
+    driver-class-name: org.postgresql.Driver
+  
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+  
+  security:
+    user:
+      name: admin
+      password: admin
+
+server:
+  port: ${PORT:8080}
+
+# WebAuthn Configuration
+webauthn:
+  rp:
+    id: ${WEBAUTHN_RP_ID:cdac-login.vercel.app}
+    name: ${WEBAUTHN_RP_NAME:CDAC Passwordless Auth}
+  origin: ${WEBAUTHN_ORIGIN:https://cdac-login.vercel.app}
+
+# JWT Configuration
+jwt:
+  secret: ${JWT_SECRET:your-256-bit-secret-key-change-this-in-production}
+  expiration: 86400000 # 24 hours
+
+# CORS Configuration
+cors:
+  allowed-origins: ${CORS_ALLOWED_ORIGINS:https://cdac-login.vercel.app}
+
+logging:
+  level:
+    com.cdac.auth: INFO
+    org.springframework.security: WARN

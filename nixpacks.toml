@@ -1,0 +1,11 @@
+[phases.setup]
+nixPkgs = ['...', 'openjdk17']
+
+[phases.build]
+cmds = ['./gradlew clean build -x test']
+
+[phases.deploy]
+cmds = ['java -Dserver.port=$PORT -jar build/libs/*.jar']
+
+[start]
+cmd = 'java -Dserver.port=$PORT -jar build/libs/*.jar'
