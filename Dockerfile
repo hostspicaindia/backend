@@ -5,7 +5,7 @@ FROM gradle:8.5-jdk17 AS build
 WORKDIR /app
 
 # Copy gradle files first (for caching)
-COPY build.gradle settings.gradle gradlew ./
+COPY build.gradle settings.gradle ./
 COPY gradle ./gradle
 
 # Download dependencies (cached layer)
