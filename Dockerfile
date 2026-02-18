@@ -17,17 +17,14 @@ COPY src ./src
 # Build the application (skip tests for faster builds)
 RUN gradle clean build -x test --no-daemon
 
-# List the built files for debugging
-RUN ls -la /app/build/libs/
-
 # Runtime stage - smaller image
 FROM eclipse-temurin:17-jre-alpine
 
 # Set working directory
 WORKDIR /app
 
-# Copy the built jar from build stage (use specific name)
-COPY --from=build /app/build/libs/passwordless-auth-backend-1.0.0.jar app.jar
+# Copy the built jar from build stage (use the -plain.jar file)
+COPY --from=build /app/build/libs/passwordless-auth-backend-1.0.0-plain.jar app.jar
 
 # Expose port (Railway will override with $PORT)
 EXPOSE 8080
